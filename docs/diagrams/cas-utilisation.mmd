@@ -1,0 +1,27 @@
+flowchart LR
+    Client([Client])
+    Vendeur([Vendeur])
+    Admin([Administrateur])
+    Livraison([Gestionnaire de livraison])
+    Catalogue((Consulter / rechercher le catalogue))
+    Panier((Gérer le panier))
+    Commander((Valider commande multivendeur))
+    Paiement((Simuler un paiement))
+    Suivi((Consulter historique et statut))
+    Produits((Gérer ses produits et stocks))
+    Ventes((Consulter ses commandes et statistiques))
+    Comptes((Gérer comptes et boutiques))
+    Exp((Consulter commandes à expédier))
+
+    Client --> Catalogue
+    Client --> Panier
+    Client --> Commander
+    Client --> Paiement
+    Client --> Suivi
+    Vendeur --> Produits
+    Vendeur --> Ventes
+    Admin --> Comptes
+    Admin --> Catalogue
+    Livraison --> Exp
+    Commander -.->|inclut| Paiement
+    Commander -.->|vérifie| Catalogue

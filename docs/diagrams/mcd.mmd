@@ -1,0 +1,23 @@
+erDiagram
+    UTILISATEUR ||--o| BOUTIQUE : possede
+    UTILISATEUR ||--o{ COMMANDE : passe
+    BOUTIQUE ||--o{ PRODUIT : publie
+    CATEGORIE ||--o{ PRODUIT : classe
+    UTILISATEUR ||--o| PANIER : utilise
+    PANIER ||--|{ LIGNE_PANIER : contient
+    PRODUIT ||--o{ LIGNE_PANIER : ajoute
+    COMMANDE ||--|{ LIGNE_COMMANDE : contient
+    PRODUIT ||--o{ LIGNE_COMMANDE : concerne
+    COMMANDE ||--o| PAIEMENT_SIMULE : regle_par
+    COMMANDE ||--o| EXPEDITION : genere
+
+    UTILISATEUR { int id PK string role string email }
+    BOUTIQUE { int id PK int vendeur_id FK string nom string ville }
+    CATEGORIE { int id PK string nom }
+    PRODUIT { int id PK int boutique_id FK int categorie_id FK string nom decimal prix int stock bool actif }
+    PANIER { int id PK int client_id FK datetime updated_at }
+    LIGNE_PANIER { int id PK int panier_id FK int produit_id FK int quantite }
+    COMMANDE { int id PK int client_id FK string reference string statut decimal total datetime created_at }
+    LIGNE_COMMANDE { int id PK int commande_id FK int produit_id FK int boutique_id FK int quantite decimal prix_unitaire decimal sous_total }
+    PAIEMENT_SIMULE { int id PK int commande_id FK string reference_paiement string mode string statut datetime confirmed_at }
+    EXPEDITION { int id PK int commande_id FK string statut string quartier string point_repere }
